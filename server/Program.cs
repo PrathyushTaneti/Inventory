@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Models;
+using server.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,13 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<OrderDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), builder =>
-    {
-        builder.MigrationsAssembly("server");
-    });
-});
+builder.Services.AddDbCont(builder.Configuration);
 
 var app = builder.Build();
 
